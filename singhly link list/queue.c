@@ -213,3 +213,255 @@ void maximum()
   else {
     temp = start;
     int max = temp->info;
+// Traverse LL and update the
+    // maximum element
+    while (temp != NULL) {
+
+      // Update the maximum
+      // element
+      if (max < temp->info)
+        max = temp->info;
+      temp = temp->link;
+    }
+    printf("\nMaximum number "
+      "is : %d ",
+      max);
+  }
+}
+
+// Function to find the mean of the
+// elements in the linked list
+void mean()
+{
+  int a[10];
+  int i;
+  struct node* temp;
+
+  // If LL is empty
+  if (start == NULL)
+    printf("\nList is empty\n");
+
+  // Otherwise
+  else {
+    temp = start;
+
+    // Stores the sum and count of
+    // element in the LL
+    int sum = 0, count = 0;
+    float m;
+
+    // Traverse the LL
+    while (temp != NULL) {
+
+      // Update the sum
+      sum = sum + temp->info;
+      temp = temp->link;
+      count++;
+    }
+
+    // Find the mean
+    m = sum / count;
+
+    // Print the mean value
+    printf("\nMean is %f ", m);
+  }
+}
+
+// Function to sort the linked list
+// in ascending order
+void sort()
+{
+  struct node* current = start;
+  struct node* index = NULL;
+  int temp;
+
+  // If LL is empty
+  if (start == NULL) {
+    return;
+  }
+
+  // Else
+  else {
+
+    // Traverse the LL
+    while (current != NULL) {
+      index = current->link;
+
+      // Traverse the LL nestedly
+      // and find the minimum
+      // element
+      while (index != NULL) {
+
+        // Swap with it the value
+        // at current
+        if (current->info > index->info) {
+          temp = current->info;
+          current->info = index->info;
+          index->info = temp;
+        }
+        index = index->link;
+      }
+
+      // Update the current
+      current = current->link;
+    }
+  }
+}
+
+// Function to reverse the linked list
+void reverseLL()
+{
+  struct node *t1, *t2, *temp;
+  t1 = t2 = NULL;
+
+  // If LL is empty
+  if (start == NULL)
+    printf("List is empty\n");
+
+  // Else
+  else {
+
+    // Traverse the LL
+    while (start != NULL) {
+
+      // reversing of points
+      t2 = start->link;
+      start->link = t1;
+      t1 = start;
+      start = t2;
+    }
+    start = t1;
+
+    // New head Node
+    temp = start;
+
+    printf("Reversed linked "
+      "list is : ");
+
+    // Print the LL
+    while (temp != NULL) {
+      printf("%d ", temp->info);
+      temp = temp->link;
+    }
+  }
+}
+
+// Function to search an element in linked list
+void search()
+{
+  int found = -1;
+  // creating node to traverse
+  struct node* tr = start;
+
+  // first checking if the list is empty or not
+  if (start == NULL) {
+    printf("Linked list is empty\n");
+  }
+  else {
+    printf("\nEnter the element you want to search: ");
+    int key;
+    scanf("%d", &key);
+
+    // checking by traversing
+    while (tr != NULL) {
+      // checking for key
+      if (tr->info == key) {
+        found = 1;
+        break;
+      }
+      // moving forward if not at this position
+      else {
+        tr = tr->link;
+      }
+    }
+
+    // printing found or not
+    if (found == 1) {
+      printf(
+        "Yes, %d is present in the linked list.\n",
+        key);
+    }
+    else {
+      printf("No, %d is not present in the linked "
+        "list.\n",
+        key);
+    }
+  }
+}
+
+// Driver Code
+int main()
+{
+  int choice;
+  while (1) {
+
+    printf("\n\t1 To see list\n");
+    printf("\t2 For insertion at"
+      " starting\n");
+    printf("\t3 For insertion at"
+      " end\n");
+    printf("\t4 For insertion at "
+      "any position\n");
+    printf("\t5 For deletion of "
+      "first element\n");
+    printf("\t6 For deletion of "
+      "last element\n");
+    printf("\t7 For deletion of "
+      "element at any position\n");
+    printf("\t8 To find maximum among"
+      " the elements\n");
+    printf("\t9 To find mean of "
+      "the elements\n");
+    printf("\t10 To sort element\n");
+    printf("\t11 To reverse the "
+      "linked list\n");
+    printf("\t12 Search an element in linked list\n");
+    printf("\t13 To exit\n");
+    printf("\nEnter Choice :\n");
+    scanf("%d", &choice);
+switch (choice) {
+    case 1:
+      traverse();
+      break;
+    case 2:
+      insertAtFront();
+      break;
+    case 3:
+      insertAtEnd();
+      break;
+    case 4:
+      insertAtPosition();
+      break;
+    case 5:
+      deleteFirst();
+      break;
+    case 6:
+      deleteEnd();
+      break;
+    case 7:
+      deletePosition();
+      break;
+    case 8:
+      maximum();
+      break;
+    case 9:
+      mean();
+      break;
+    case 10:
+      sort();
+      break;
+    case 11:
+      reverseLL();
+      break;
+    case 12:
+      search();
+      break;
+    case 13:
+      exit(1);
+      break;
+    default:
+      printf("Incorrect Choice\n");
+    }
+  }
+  return 0;
+}
